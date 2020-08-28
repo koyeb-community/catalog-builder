@@ -13,8 +13,8 @@ publish:
 		docker push koyeb/$(NAME):$$tag ; \
 	done ;\
 	docker run -v $PWD:/workspace \
-		-e DOCKERHUB_USERNAME='${DOCKERHUB_USERNAME}' \
-		-e DOCKERHUB_PASSWORD='${DOCKERHUB_PASSWORD}' \
+		-e DOCKERHUB_USERNAME='${DOCKER_USERNAME}' \
+		-e DOCKERHUB_PASSWORD='${DOCKER_PASSWORD}' \
 		-e DOCKERHUB_REPOSITORY='koyeb/${NAME}' \
 		-e README_FILEPATH='/workspace/README.md' \
 		peterevans/dockerhub-description:2.3
