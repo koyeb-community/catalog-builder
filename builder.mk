@@ -9,5 +9,6 @@ publish:
 	docker push koyeb/$(NAME)
 	for tag in $(TAGS) ; \
 	do \
+		docker tag koyeb/$(NAME) koyeb/$(NAME):$$tag ; \
 		docker push koyeb/$(NAME):$$tag ; \
 	done ;\
