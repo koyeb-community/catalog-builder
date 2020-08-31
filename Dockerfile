@@ -8,7 +8,7 @@ COPY out/$PROJECT.tar /var/task
 
 WORKDIR /var/task
 
-RUN tar xf $PROJECT.tar && rm $PROJECT.tar
+RUN tar xf $PROJECT.tar -C / && rm $PROJECT.tar
 
 FROM koyeb/runtime:$RUNTIME
 
