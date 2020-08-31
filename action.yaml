@@ -1,0 +1,33 @@
+name: 'Koyeb community catalog builder'
+description: 'Build and publish a function to the koyeb community docker hub'
+inputs:
+  docker_username:
+    description: 'Docker username'
+    required: true
+  docker_password:
+    description: 'Docker password'
+    required: true
+  docker_organization:
+    description: 'Docker organization'
+    required: false
+    default: "koyeb"
+runs:
+  using: "composite"
+  steps:
+    - name: Login to GitHub Package Registry
+      shell: bash
+      run: echo "${{ inputs.docker_password }}" | docker login -u "${{ inputs.docker_username }}" --password-stdin
+    - run: sudo snap install yq
+      shell: bash
+    - run: ${{ github.action_path }}/package.sh
+      shell: bash
+      env:
+        SCRIPT_DIR: ${{ github.action_path }}
+        DOCKER_ORGANIZATION: ${{ inputs.docker_organization }}
+    - run: ${{ github.action_path }}/publish.sh
+      shell: bash
+      env:
+        SCRIPT_DIR: ${{ github.action_path }}
+        DOCKER_ORGANIZATION: ${{ inputs.docker_organization }}
+        DOCKER_USERNAME: ${{ inputs.docker_username }}
+        DOCKER_PASSWORD: ${{ inputs.docker_password }}
