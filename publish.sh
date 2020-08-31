@@ -13,8 +13,8 @@ if [[ "$GITHUB_REF" =~ ^refs/tags/v.*$ ]]; then
   major=$(echo $release | awk -F \. {'print $1'})
   minor=$(echo $release | awk -F \. {'print $1 "." $2'})
   TAGS="$release"
-  TAGS+="$major"
-  TAGS+="$minor"
+  TAGS+=" $major"
+  TAGS+=" $minor"
 fi
 
 IMAGE=$DOCKER_ORGANIZATION/$NAME
